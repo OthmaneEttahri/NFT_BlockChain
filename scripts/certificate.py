@@ -1,4 +1,4 @@
-import timestamp, cryptography
+from scripts import timestamp, cryptography
 from json import dumps
 
 class Certificate:

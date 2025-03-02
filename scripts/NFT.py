@@ -1,9 +1,11 @@
-from blockchain import Blockchain
-from certificate import Certificate
-from block import Block
-from timestamp import now
+from scripts.blockchain import Blockchain
+from scripts.certificate import Certificate
+from scripts.block import Block
+from scripts.timestamp import now
 import random
 import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class NFT:
@@ -38,10 +40,10 @@ class Collection:
         self.authorizedMinters.add(ownerPublicKey)
 
         #image de la collection
-        self.imagePath = os.path.join("..","imprimerie")
+        self.imagePath = os.path.join(BASE_DIR, "..", "imprimerie")
         self.availableImages = []
         for file in os.listdir(self.imagePath):
-            if file.endswith(".png", ".jpg", ".webp"):
+            if file.lower().endswith((".png", ".jpg", ".webp")):
                 self.availableImages.append(file)
 
 
@@ -73,6 +75,9 @@ class Collection:
 
     
     def mint(self, userPublicKey):
+        #vérification si la période minting est expirée
+        self.check_mint_period()
+
         current_time = now()
         # vérification de l'autorisation à mint
         # s'assurer de la période de minting
@@ -176,6 +181,13 @@ class Collection:
         }
 
         return info_collection
+    
+    # fermeture de la période de minting
+
+    def check_mint_period(self):
+        if self.mintingOpen and now() > self.mintEnd:
+            self.mintingOpen = False
+
 
         
 

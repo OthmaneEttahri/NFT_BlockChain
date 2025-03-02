@@ -1,4 +1,4 @@
-from certificate import Certificate
+from scripts.certificate import Certificate
 
 class Block(Certificate):     # A block is also a certificate since it must be signed and protected
     

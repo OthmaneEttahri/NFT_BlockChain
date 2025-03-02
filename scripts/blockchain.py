@@ -1,12 +1,12 @@
-import cryptography
-from block import Block
+from scripts.cryptography import get_black_hole_public_key, get_default_hash
+from scripts.block import Block
 
 class Blockchain:
     
     @staticmethod                # Static function
     def build_genesis_block():   # Here we build the genesis block and return it
-        blackHolePublicKey = cryptography.get_black_hole_public_key()  # The black hole is the issuer
-        defaultHash = cryptography.get_default_hash()                  # No parent
+        blackHolePublicKey = get_black_hole_public_key()  # The black hole is the issuer
+        defaultHash = get_default_hash()                  # No parent
         genesisBlock = Block(blackHolePublicKey, 0, defaultHash, [])   # No certificate
         genesisBlock.timestamp = 0                                     # It exists since dawn of times
         return genesisBlock
