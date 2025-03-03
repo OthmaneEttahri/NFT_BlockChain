@@ -1,0 +1,2 @@
+A la creation d'une nouvelle collection, demande à l'utilisateur de choisir une clé privé à hacher et mettre dans la structure
+implémentation de l'athentification par clé privé du user pour open_mint, mint, transfer
